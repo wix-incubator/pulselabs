@@ -6,7 +6,7 @@ This website is powered by Wix Headless and built using [wix-headless.dev](https
 
 ## Links
 
-- Live site: [https://pulse-labs-acc09c00-gonenj.wix-site-host.com](https://pulse-labs-acc09c00-gonenj.wix-site-host.com)
+- Live site: [https://pulseinformatics.com/](https://pulseinformatics.com/)
 - Source: [https://github.com/wix-incubator/pulselabs](https://github.com/wix-incubator/pulselabs)
 - Wix site ID: `08a20642-2eca-4f8a-b829-6f42e5690725`
 
