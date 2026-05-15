@@ -31,6 +31,13 @@ const modules = [
   "SDK-ready data layer",
   "Member and workflow patterns",
 ];
+
+const timeline = [
+  "Capture usage event",
+  "Match member profile",
+  "Route to account queue",
+  "Trigger next best action",
+];
 ---
 
 <div class="app-shell">
@@ -49,12 +56,17 @@ const modules = [
     <div class="sidebar-note">
       <span>Headless mode</span>
       <strong>Astro + Wix</strong>
+      <small>Powered by Wix Headless. Built with wix-headless.dev.</small>
     </div>
   </aside>
 
   <main>
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-copy">
+        <div class="hero-kicker">
+          <span>Live product surface</span>
+          <strong>09:41 UTC</strong>
+        </div>
         <p class="eyebrow">SaaS showcase</p>
         <h1 id="page-title">A launch room for data, members, and workflow signals.</h1>
         <p>
@@ -62,6 +74,10 @@ const modules = [
           SaaS surface: metric panels, member states, event queues, and
           automation-ready copy shaped for a custom front end.
         </p>
+        <div class="hero-actions" aria-label="Pulse Labs actions">
+          <a href="#signals" class="primary-link">View signal board</a>
+          <a href="#data" class="secondary-link">Inspect stack</a>
+        </div>
       </div>
 
       <section class="metrics-panel" id="members" aria-label="Operating metrics">
@@ -79,6 +95,12 @@ const modules = [
               </article>
             ))
           }
+        </div>
+        <div class="health-strip" aria-label="System health">
+          <span></span>
+          <span></span>
+          <span></span>
+          <strong>All connectors healthy</strong>
         </div>
       </section>
     </section>
@@ -108,12 +130,48 @@ const modules = [
         <p class="eyebrow">Automation path</p>
         <h2>Capture event, qualify account, send the next action.</h2>
         <div class="flow" aria-label="Automation sequence">
-          <span>Event</span>
-          <span>Rule</span>
-          <span>Member</span>
-          <span>Action</span>
+          {
+            timeline.map((item) => (
+              <span>{item}</span>
+            ))
+          }
         </div>
       </article>
+    </section>
+
+    <section class="data-ops" aria-label="Data operations preview">
+      <div class="ops-window">
+        <div class="window-bar">
+          <span></span>
+          <span></span>
+          <span></span>
+          <strong>members.sync</strong>
+        </div>
+        <code>
+          <span>event.created</span>
+          <strong>usage_spike</strong>
+          <em>matched to 382 accounts</em>
+        </code>
+        <code>
+          <span>segment.updated</span>
+          <strong>activation_risk</strong>
+          <em>queued for follow-up</em>
+        </code>
+        <code>
+          <span>workflow.ready</span>
+          <strong>nudge_sequence</strong>
+          <em>waiting on profile state</em>
+        </code>
+      </div>
+      <div class="ops-copy">
+        <p class="eyebrow">Wix Headless capability</p>
+        <h2>Keep Wix operational, make the product interface unmistakably yours.</h2>
+        <p>
+          The site demonstrates how a SaaS team can build dense internal or
+          customer-facing tools on a headless foundation without inheriting a
+          generic dashboard aesthetic.
+        </p>
+      </div>
     </section>
 
     <section class="foundation" id="data" aria-label="Headless foundation">
@@ -132,6 +190,10 @@ const modules = [
         }
       </div>
     </section>
+    <footer class="site-credit">
+      <span>Powered by Wix Headless | Built with <a href="https://www.wix-headless.dev" target="_blank" rel="noreferrer">wix-headless.dev</a></span>
+      <a href="https://github.com/wix-incubator/pulselabs" target="_blank" rel="noreferrer">View source on GitHub</a>
+    </footer>
   </main>
 </div>
 
@@ -143,7 +205,7 @@ const modules = [
   :global(body) {
     margin: 0;
     min-width: 320px;
-    background: #eef3ea;
+    background: #edf3ea;
     color: #11130f;
     font-family:
       Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
@@ -158,12 +220,12 @@ const modules = [
   .app-shell {
     min-height: 100svh;
     display: grid;
-    grid-template-columns: 17rem minmax(0, 1fr);
+    grid-template-columns: 17.5rem minmax(0, 1fr);
     background:
       linear-gradient(rgba(17, 19, 15, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(17, 19, 15, 0.05) 1px, transparent 1px),
-      #eef3ea;
-    background-size: 32px 32px;
+      linear-gradient(135deg, #edf3ea, #f8fbf5 55%, #e9eef8);
+    background-size: 32px 32px, 32px 32px, auto;
   }
 
   .sidebar {
@@ -172,9 +234,10 @@ const modules = [
     display: flex;
     height: 100svh;
     flex-direction: column;
-    border-right: 1px solid #c6d1c0;
+    border-right: 1px solid #bac8b3;
     background: rgba(250, 252, 247, 0.9);
     padding: 1.1rem;
+    backdrop-filter: blur(18px);
   }
 
   .brand {
@@ -186,18 +249,19 @@ const modules = [
   }
 
   .brand-pulse {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.35rem;
+    height: 2.35rem;
     border: 1px solid #11130f;
     background:
-      linear-gradient(135deg, transparent 44%, #11130f 45% 55%, transparent 56%),
-      #c7f45d;
+      linear-gradient(135deg, transparent 43%, #11130f 44% 55%, transparent 56%),
+      linear-gradient(90deg, #c7f45d 0 50%, #2b6ff6 50% 100%);
+    box-shadow: 5px 5px 0 #11130f;
   }
 
   nav {
     display: grid;
     gap: 0.35rem;
-    margin-top: 2.5rem;
+    margin-top: 2.7rem;
   }
 
   nav a {
@@ -220,6 +284,7 @@ const modules = [
     background: #11130f;
     color: #f8fff0;
     padding: 1rem;
+    box-shadow: 5px 5px 0 #c7f45d;
   }
 
   .sidebar-note span,
@@ -237,15 +302,22 @@ const modules = [
     color: #c7f45d;
   }
 
+  .sidebar-note small {
+    display: block;
+    margin-top: 0.9rem;
+    color: rgba(248, 255, 240, 0.68);
+    line-height: 1.5;
+  }
+
   main {
-    width: min(100%, 1280px);
+    width: min(100%, 1320px);
     margin: 0 auto;
     padding: clamp(1rem, 3vw, 2rem);
   }
 
   .hero {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
     gap: clamp(1rem, 3vw, 2rem);
     min-height: calc(100svh - clamp(2rem, 6vw, 4rem));
     align-items: stretch;
@@ -255,19 +327,51 @@ const modules = [
   .metrics-panel,
   .signal-board,
   .automation-card,
-  .foundation {
+  .foundation,
+  .data-ops {
     border: 1px solid #11130f;
-    background: rgba(255, 255, 255, 0.84);
+    background: rgba(255, 255, 255, 0.86);
   }
 
   .hero-copy {
+    position: relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: clamp(1.25rem, 5vw, 4rem);
+    padding: clamp(1.25rem, 5vw, 4.25rem);
     background:
-      linear-gradient(135deg, rgba(199, 244, 93, 0.36), transparent 34%),
+      linear-gradient(135deg, rgba(199, 244, 93, 0.42), transparent 32%),
+      linear-gradient(315deg, rgba(43, 111, 246, 0.12), transparent 40%),
       linear-gradient(180deg, #ffffff, #f8fbf5);
+  }
+
+  .hero-copy::after {
+    position: absolute;
+    right: clamp(1rem, 4vw, 3rem);
+    bottom: clamp(1rem, 4vw, 3rem);
+    width: min(34vw, 24rem);
+    height: 0.7rem;
+    content: "";
+    background: linear-gradient(90deg, #c7f45d, #2b6ff6, #e64b35);
+  }
+
+  .hero-kicker {
+    position: absolute;
+    top: clamp(1rem, 3vw, 1.5rem);
+    right: clamp(1rem, 3vw, 1.5rem);
+    display: inline-flex;
+    gap: 0.7rem;
+    align-items: center;
+    border: 1px solid #11130f;
+    background: #fff;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 850;
+  }
+
+  .hero-kicker span {
+    color: #566151;
   }
 
   .eyebrow {
@@ -289,18 +393,49 @@ const modules = [
   h1 {
     max-width: 13ch;
     margin: 0.8rem 0 1.25rem;
-    font-size: clamp(3.5rem, 8.5vw, 8.25rem);
+    font-size: clamp(3.45rem, 8.5vw, 8.45rem);
     font-weight: 880;
     line-height: 0.86;
     letter-spacing: 0;
   }
 
-  .hero-copy p:last-child {
+  .hero-copy p:not(.eyebrow) {
     max-width: 45rem;
     margin-bottom: 0;
     color: #4c5548;
     font-size: clamp(1rem, 2vw, 1.22rem);
     line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .primary-link,
+  .secondary-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    border: 1px solid #11130f;
+    padding: 0.75rem 1rem;
+    font-size: 0.88rem;
+    font-weight: 850;
+  }
+
+  .primary-link {
+    background: #11130f;
+    color: #f8fff0;
+    box-shadow: 5px 5px 0 #c7f45d;
+  }
+
+  .secondary-link {
+    background: #fff;
+    color: #11130f;
   }
 
   .metrics-panel {
@@ -336,7 +471,9 @@ const modules = [
 
   .metric-grid article {
     border: 1px solid rgba(248, 255, 240, 0.18);
-    background: rgba(248, 255, 240, 0.06);
+    background:
+      linear-gradient(90deg, rgba(199, 244, 93, 0.08), transparent),
+      rgba(248, 255, 240, 0.06);
     padding: clamp(1rem, 3vw, 1.35rem);
   }
 
@@ -359,26 +496,45 @@ const modules = [
     font-weight: 800;
   }
 
+  .health-strip {
+    display: grid;
+    grid-template-columns: auto auto auto 1fr;
+    gap: 0.45rem;
+    align-items: center;
+    border-top: 1px solid rgba(248, 255, 240, 0.18);
+    padding-top: 1rem;
+    color: rgba(248, 255, 240, 0.72);
+    font-size: 0.82rem;
+  }
+
+  .health-strip span {
+    width: 0.55rem;
+    height: 0.55rem;
+    background: #c7f45d;
+  }
+
   .command-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
     gap: clamp(1rem, 3vw, 2rem);
     margin-top: clamp(1rem, 3vw, 2rem);
   }
 
   .signal-board,
   .automation-card,
-  .foundation {
-    padding: clamp(1.25rem, 3vw, 2rem);
+  .foundation,
+  .data-ops {
+    padding: clamp(1rem, 3vw, 1.6rem);
   }
 
   .section-heading h2,
   .automation-card h2,
-  .foundation h2 {
-    margin: 0.65rem 0 0;
-    font-size: clamp(2rem, 4vw, 4.4rem);
-    line-height: 0.96;
-    letter-spacing: 0;
+  .foundation h2,
+  .ops-copy h2 {
+    margin: 0.7rem 0 0;
+    font-size: clamp(2rem, 4vw, 3.6rem);
+    font-weight: 870;
+    line-height: 0.94;
   }
 
   .signal-list {
@@ -388,107 +544,193 @@ const modules = [
   }
 
   .signal-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 1rem;
-    border: 1px solid #c6d1c0;
+    align-items: center;
+    border: 1px solid #11130f;
     background: #f8fbf5;
     padding: 1rem;
   }
 
   .signal-row span {
-    display: block;
-    color: #66705e;
+    color: #6a7465;
     font-size: 0.78rem;
-    font-weight: 800;
+    font-weight: 850;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
   }
 
   .signal-row strong {
     display: block;
-    margin-top: 0.35rem;
-    line-height: 1.35;
+    margin-top: 0.45rem;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    line-height: 1.15;
   }
 
   .signal-row em {
     border: 1px solid #11130f;
     background: #c7f45d;
-    padding: 0.35rem 0.5rem;
+    padding: 0.4rem 0.55rem;
     color: #11130f;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-style: normal;
     font-weight: 850;
-    text-transform: uppercase;
   }
 
   .automation-card {
-    background: #fff;
+    background:
+      linear-gradient(135deg, #11130f, #1d2435);
+    color: #f8fff0;
+  }
+
+  .automation-card .eyebrow {
+    color: #c7f45d;
   }
 
   .flow {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
-    margin-top: clamp(2rem, 6vw, 4.5rem);
+    gap: 0.65rem;
+    margin-top: 2rem;
   }
 
   .flow span {
+    border: 1px solid rgba(248, 255, 240, 0.24);
+    background: rgba(248, 255, 240, 0.08);
+    padding: 0.85rem;
+    color: #f8fff0;
+    font-size: 0.88rem;
+    font-weight: 850;
+  }
+
+  .data-ops {
     display: grid;
-    min-height: 6rem;
-    place-items: center;
-    border: 1px solid #11130f;
-    background: #11b5ad;
-    color: #06211f;
-    font-weight: 900;
-  }
-
-  .flow span:nth-child(2) {
-    background: #f8d66d;
-  }
-
-  .flow span:nth-child(3) {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(1rem, 4vw, 2.5rem);
+    margin-top: clamp(1rem, 3vw, 2rem);
     background: #ffffff;
   }
 
-  .flow span:nth-child(4) {
+  .ops-window {
+    border: 1px solid #11130f;
+    background: #11130f;
+    color: #f8fff0;
+  }
+
+  .window-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    border-bottom: 1px solid rgba(248, 255, 240, 0.18);
+    padding: 0.8rem;
+  }
+
+  .window-bar span {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 999px;
+    background: #c7f45d;
+  }
+
+  .window-bar span:nth-child(2) {
+    background: #2b6ff6;
+  }
+
+  .window-bar span:nth-child(3) {
     background: #e64b35;
-    color: #fff;
+  }
+
+  .window-bar strong {
+    margin-left: auto;
+    color: rgba(248, 255, 240, 0.68);
+    font-size: 0.8rem;
+  }
+
+  code {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: 0.7rem;
+    border-bottom: 1px solid rgba(248, 255, 240, 0.12);
+    padding: 1rem;
+    color: inherit;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.82rem;
+  }
+
+  code span {
+    color: #c7f45d;
+  }
+
+  code em {
+    color: rgba(248, 255, 240, 0.6);
+    font-style: normal;
+  }
+
+  .ops-copy {
+    align-self: center;
+  }
+
+  .ops-copy p:not(.eyebrow) {
+    color: #4c5548;
+    line-height: 1.7;
   }
 
   .foundation {
     display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(300px, 1fr);
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
     gap: clamp(1rem, 3vw, 2rem);
     margin-top: clamp(1rem, 3vw, 2rem);
+    background: #f8fbf5;
   }
 
   .module-grid {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;
   }
 
   .module-grid article {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    border: 1px solid #c6d1c0;
-    background: #f8fbf5;
+    display: grid;
+    min-height: 10rem;
+    align-content: space-between;
+    border: 1px solid #11130f;
+    background: #fff;
     padding: 1rem;
   }
 
   .module-grid span {
-    width: 0.85rem;
-    height: 0.85rem;
-    background: #e64b35;
+    width: 2rem;
+    height: 0.5rem;
+    background: linear-gradient(90deg, #c7f45d, #2b6ff6);
+  }
+
+  .site-credit {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    margin-top: clamp(1rem, 3vw, 2rem);
+    border: 1px solid #11130f;
+    background: #fff;
+    padding: 1rem;
+    color: #4c5548;
+    font-size: 0.88rem;
+    font-weight: 850;
+  }
+
+  .site-credit a {
+    color: #2b6ff6;
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
   }
 
   .module-grid p {
     margin-bottom: 0;
-    font-weight: 760;
+    font-weight: 820;
+    line-height: 1.25;
   }
 
-  @media (max-width: 980px) {
+  @media (max-width: 1080px) {
     .app-shell {
       grid-template-columns: 1fr;
     }
@@ -497,42 +739,54 @@ const modules = [
       position: static;
       height: auto;
       border-right: 0;
-      border-bottom: 1px solid #c6d1c0;
+      border-bottom: 1px solid #bac8b3;
     }
 
     nav {
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: 1rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 1.2rem;
     }
 
     .sidebar-note {
-      display: none;
+      margin-top: 1.2rem;
     }
+  }
 
+  @media (max-width: 860px) {
     .hero,
     .command-grid,
-    .foundation {
+    .foundation,
+    .data-ops {
       grid-template-columns: 1fr;
     }
 
     .hero {
       min-height: auto;
     }
+
+    .hero-kicker {
+      position: static;
+      width: fit-content;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-copy::after {
+      display: none;
+    }
   }
 
   @media (max-width: 620px) {
-    main {
-      padding: 0.75rem;
-    }
-
-    .flow {
+    nav,
+    .module-grid {
       grid-template-columns: 1fr;
     }
 
-    .signal-row {
-      align-items: flex-start;
-      flex-direction: column;
+    h1 {
+      font-size: clamp(3rem, 17vw, 5rem);
+    }
+
+    code {
+      grid-template-columns: 1fr;
     }
   }
 </style>
